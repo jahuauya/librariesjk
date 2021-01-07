@@ -1,0 +1,26 @@
+node {
+
+  on_branch to: feature, { 
+    continuous_integration() 
+  }
+  
+  on_branch to: develop, {                              
+    continuous_integration()
+    publish   dev
+    deploy_to dev
+  }
+
+  on_branch to: release, { 
+    install()
+    build()
+    publish   test
+    deploy_to test
+  }
+  
+  on_branch to: master,  { 
+    install()
+    build()
+    publish prod
+  }
+
+}
